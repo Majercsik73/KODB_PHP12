@@ -8,9 +8,11 @@ $routes = [
     "GET" => [
         "/KODB_PHP12/" => "homeHandler",
         "/KODB_PHP12/termekek" => "productListHandler"
+        
     ],
     "POST" => [
-        "/KODB_PHP12/termekek" => "createProductHandler"
+        "/KODB_PHP12/termekek" => "createProductHandler",
+        "/KODB_PHP12/delete-product" => "deleteProductHandler"
     ]
 ];
 // ebbe a function-ba kötjük be a methodot és a path-t stringként
@@ -19,6 +21,37 @@ $handlerFunction = $routes[$method][$path] ?? "notFoundHandler";
 // elírások kiküszöbölésére egy beépített függvényvizsgálatot hívunk
 $safeHandlerFunction = function_exists($handlerFunction) ? $handlerFunction : "notFoundHandler";
 $safeHandlerFunction();
+
+
+function deleteProductHandler()
+{
+    $deletedProductId = $_GET["id"] ?? "";
+    $products = json_decode(file_get_contents("./products.json"), true);
+    //echo "<pre>";
+    //var_dump($products);
+
+    $foundProductIndex = -1;
+
+    foreach ($products as $index => $product){
+        if($product['id'] == $deletedProductId){
+            $foundProductIndex = $index;
+            break;
+        }
+    }
+    //ha nem találta az elemet, visszatérünk a termékek oldalra
+    if($foundProductIndex == -1){
+        header("Location: /KODB_PHP12/termekek");
+        return;
+    }
+
+    //ha megvan az index, eltávolítjuk a listábol az elemet
+    array_splice($products, $foundProductIndex, 1);
+
+    //echo "<pre>";
+    //var_dump($products);
+    file_put_contents("./products.json", json_encode($products));
+    header("Location: /KODB_PHP12/termekek");
+}
 
 function compileTemplate($filePath, $params = []): string
 {
