@@ -12,10 +12,10 @@
 <body>
     <nav class="navbar navbar-expand navbar-light bg-danger">
         <div class="navbar-nav">
-            <a class="nav-item nav-link <?php echo $params['activeLink'] === "KODB_PHP12/" ? "active" : "" ?>" href="/KODB_PHP11/">
+            <a class="nav-item nav-link <?php echo $params['activeLink'] === "KODB_PHP12/" ? "active" : "" ?>" href="/KODB_PHP12/">
                 Címlap
             </a>
-            <a class="nav-item nav-link <?php echo $params['activeLink'] === "KODB_PHP12/termekek" ? "active" : "" ?>" href="/KODB_PHP11/termekek">
+            <a class="nav-item nav-link <?php echo $params['activeLink'] === "KODB_PHP12/termekek" ? "active" : "" ?>" href="/KODB_PHP12/termekek">
                 Termékek
             </a>
         </div>

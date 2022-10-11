@@ -16,7 +16,16 @@
             <p>Ár: <?php echo $product["price"] ?> ft</p>
             
             <?php if($params['editedProductId'] == $product["id"]): ?>
-                Szerkesztett elemet
+                <form class="form-inline form-group" action="/KODB_PHP12/update-product?id=<?php echo $product["id"] ?>" method="post">
+                    <input class="form-control mr-2" type="text" name="name" placeholder="Név" value="<?php echo $product["name"] ?>" />
+                    <input class="form-control mr-2" type="number" name="price" placeholder="Ár" value="<?php echo $product["price"] ?>" />
+                    
+                    <a href="/KODB_PHP12/termekek">
+                        <button type="button" class="btn btn-primary mr-2">Vissza</button>
+                    </a>
+
+                    <button type="submit" class="btn btn-success">Küldés</button>
+                </form>
             
             <?php else: ?>
                 <div class="btn-group">
