@@ -79,7 +79,8 @@ function productListHandler()
     
     $productTemplate = compileTemplate("./views/product-list.php", [
         "products" => $products,
-        "isSuccess" => $isSuccess
+        "isSuccess" => $isSuccess,
+        "editedProductId" => $_GET["szerkesztes"] ?? ""
     ]);
 
     echo compileTemplate("./views/wrapper.php", [

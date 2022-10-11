@@ -14,14 +14,22 @@
         <?php foreach ($params['products'] as $product) : ?>
             <h3>Név: <?php echo $product["name"] ?></h3>
             <p>Ár: <?php echo $product["price"] ?> ft</p>
-            <div class="btn-group">
-                <a href="/KODB_PHP12/termekek?szerkesztes=<?php echo $product["id"]?>">
-                    <button class="btn btn-warning mr-2">Szerkesztés</button>
-                </a>
-                <form method="post" action="/KODB_PHP12/delete-product?id=<?php echo $product["id"] ?>">
-                    <button type="submit" class="btn btn-danger">Törlés</button>
-                </form>
-            </div>
+            
+            <?php if($params['editedProductId'] == $product["id"]): ?>
+                Szerkesztett elemet
+            
+            <?php else: ?>
+                <div class="btn-group">
+                    <a href="/KODB_PHP12/termekek?szerkesztes=<?php echo $product["id"]?>">
+                        <button class="btn btn-warning mr-2">Szerkesztés</button>
+                    </a>
+                    <form method="post" action="/KODB_PHP12/delete-product?id=<?php echo $product["id"] ?>">
+                        <button type="submit" class="btn btn-danger">Törlés</button>
+                    </form>
+                </div>
+            <?php endif; ?>
+
+            
             <hr>
         <?php endforeach; ?>
 
